@@ -1,0 +1,15 @@
+# Core Machine Learning Frameworks
+torch
+pytorch-tabnet
+lightgbm
+xgboost
+catboost
+scikit-learn
+
+# Data Processing & Utils
+pandas
+openpyxl
+joblib
+numpy
+matplotlib
+seaborn
