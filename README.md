@@ -7,11 +7,11 @@ Deep learning-based yield prediction for Perovskite/Silicon tandem solar cells u
 
 ```text
 checkpoints/
-├── dae_best.pth            # DAEの重み・設定・学習履歴（辞書形式）
-├── tabnet_model.zip        # TabNetのモデル本体
-├── scalers.pkl             # 前処理（StandardScaler）の統計量
+├── dae_best_model.pth            # DAEの重み・設定・学習履歴（辞書形式）
+├── tabnet_standalone_best.zip        # TabNetのモデル本体
+├── scalers (1).pkl             # 前処理（StandardScaler）の統計量
 └── stacking/               # スタッキング層のベースモデル群
     ├── lgbm.pkl            # LightGBM (Base model 1)
     ├── xgb.pkl             # XGBoost (Base model 2)
     ├── cat.pkl             # CatBoost (Base model 3)
-    └── meta_lasso.pkl      # Lasso (Meta-regressor)
+    └── stacking_meta_assets.pth      # Lasso (Meta-regressor)
