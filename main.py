@@ -14,9 +14,9 @@ def main():
     DATA_PATH = 'data/sample_input.xlsx'
     CHECKPOINT_DIR = 'checkpoints'
     
-    DAE_PATH = os.path.join(CHECKPOINT_DIR, 'dae_best.pth')
-    TABNET_PATH = os.path.join(CHECKPOINT_DIR, 'tabnet_model.zip')
-    SCALER_PATH = os.path.join(CHECKPOINT_DIR, 'scalers.pkl')
+    DAE_PATH = os.path.join(CHECKPOINT_DIR, 'dae_best_model.pth')
+    TABNET_PATH = os.path.join(CHECKPOINT_DIR, 'tabnet_standalone_best.zip')
+    SCALER_PATH = os.path.join(CHECKPOINT_DIR, 'scalers (1).pkl')
     STACKING_DIR = os.path.join(CHECKPOINT_DIR, 'stacking')
 
     print(f"--- Tandem Solar Yield Prediction Pipeline (Device: {DEVICE}) ---")
