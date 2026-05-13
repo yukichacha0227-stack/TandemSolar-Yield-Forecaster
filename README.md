@@ -2,7 +2,7 @@
 Deep learning-based yield prediction for Perovskite/Silicon tandem solar cells using actual meteorological data and theoretical device parameters. (全国の発電量適地予測に向けた、実測気象データと理論デバイス物性を統合した高精度予測モデル)
 
 ## 📦 Model Checkpoints
-本モデルの動作に必要な学習済み資産は、[Releases]([ここにGitHubのReleaseページのURL](https://github.com/yukichacha0227-stack/TandemSolar-Yield-Forecaster/releases/tag/v1.0.0)) からダウンロードし、以下のディレクトリ構造に従って配置してください。
+本モデルの動作に必要な学習済み資産は、[Releases]([https://github.com/yukichacha0227-stack/TandemSolar-Yield-Forecaster/releases/tag/v1.0.0]) からダウンロードし、以下のディレクトリ構造に従って配置してください。
 ※ `.gitignore` により、これらのバイナリファイルはGit管理から除外されています。
 
 ```text
