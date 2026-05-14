@@ -1,8 +1,6 @@
 # TandemSolar-Yield-Forecaster
 Deep learning-based yield prediction for Perovskite/Silicon tandem solar cells using actual meteorological data and theoretical device parameters. (全国の発電量適地予測に向けた、実測気象データと理論デバイス物性を統合した高精度予測モデル)
 
-# Tandem Solar Yield Prediction with Hybrid Deep Learning & Stacking Ensemble
-
 本プロジェクトは、ペロブスカイト/シリコンタンデム太陽電池の発電量（Yield）を高精度に予測するための機械学習パイプラインです。
 Denoising AutoEncoder (DAE) による自己教師あり学習、TabNet による深層学習、そして 5-Fold GBDT 群を用いたスタッキング・アンサンブルを組み合わせた、石河研究室（青山学院大学）の研究成果をベースとした実装です。
 
