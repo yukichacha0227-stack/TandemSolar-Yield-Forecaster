@@ -87,7 +87,7 @@ Stacking Inference: 15 個の GBDT モデルによる予測値を、メタモデ
     └── experiment.ipynb    # 試行錯誤の過程を残したノートブック（公開用）
 ```
 
-##🎓 Acknowledgements
+## 🎓 Acknowledgements
 青山学院大学 理工学部 電気電子工学コース 石河研究室
 ──────────────────────────────────────────────────────────────────────────────
 © 2026 Ishikawa Lab, Aoyama Gakuin University.
