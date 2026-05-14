@@ -10,6 +10,9 @@ Denoising AutoEncoder (DAE) による自己教師あり学習、TabNet による
 - **Robustness**: データのノイズに強い DAE 潜在変数と、未知の気象データに対して高い汎化性能を持つアンサンブル手法の融合。
 - **Developer Friendly**: 複雑な資産管理を `src/config.py` で一元化し、ワンコマンドでの推論・評価が可能。
 
+## 1. 依存ライブラリのインストール
+pip install -r requirements.txt
+
 ##  🗺  リポジトリ構成
 ```text
 .
