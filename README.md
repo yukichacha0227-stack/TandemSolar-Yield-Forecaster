@@ -13,6 +13,7 @@ Deep learning-based yield prediction for Perovskite/Silicon tandem solar cells u
 │   └── stacking_models.py  # GBDTやLassoを含むスタッキング層の定義
 ├── src/
 │   ├── __init__.py
+|   |── config.py           # Fold番号を自動で付与
 │   ├── data_loader.py      # Excel読み込み、前処理、スケーリング
 │   ├── feature_extractor.py # DAEとTabNetを用いた特徴量抽出ロジック
 │   └── trainer.py          # 学習・バリデーション用ループ関数
