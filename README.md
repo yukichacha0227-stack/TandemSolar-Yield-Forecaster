@@ -10,8 +10,55 @@ Denoising AutoEncoder (DAE) による自己教師あり学習、TabNet による
 - **Robustness**: データのノイズに強い DAE 潜在変数と、未知の気象データに対して高い汎化性能を持つアンサンブル手法の融合。
 - **Developer Friendly**: 複雑な資産管理を `src/config.py` で一元化し、ワンコマンドでの推論・評価が可能。
 
-## 1. 依存ライブラリのインストール
+##🛠 Setup
+1. 依存ライブラリのインストール
 pip install -r requirements.txt
+
+2. 学習済み資産（Checkpoints）の配置
+本モデルの動作に必要な学習済み資産は、[Releases](https://github.com/yukichacha0227-stack/TandemSolar-Yield-Forecaster/releases/tag/v1.0.0) からダウンロードし、以下のディレクトリ構造に従って配置してください。
+※ `.gitignore` により、これらのバイナリファイルはGit管理から除外されています。
+```text
+checkpoints/
+├── dae_best_model.pth            # DAEの重み・設定・学習履歴（辞書形式）
+├── tabnet_standalone_best.zip        # TabNetのモデル本体
+├── scalers (1).pkl             # 前処理（StandardScaler）の統計量
+└── stacking/               # スタッキング層のベースモデル群
+    ├── lgbm_fold0.pkl 〜 lgbm_fold4.pkl           # LightGBM (Base model 1)
+    ├── xgb_fold0.pkl 〜 xgb_fold4.pkl             # XGBoost (Base model 2)
+    ├── cat_fold0.pkl 〜 cat_fold4.pkl             # CatBoost (Base model 3)
+    └── stacking_meta_assets.pth      # Lasso (Meta-regressor)
+```
+
+##📊 Usage
+以下のコマンドを実行することで、data/sample_input.xlsx を用いた推論と精度評価が開始されます。
+python main.py
+
+## 📊 Data
+- `data/sample_input.xlsx`: 動作確認用のサンプルデータです。
+  - 実際の推論を行う際は、このファイルと同じカラム構成の Excel ファイルを用意してください。
+  - 本プロジェクトでは、Atlas データの形式に基づいた前処理を `src/data_loader.py` で行っています。
+  - ### 📊 Input Data Format (Excel)
+推論に使用する Excel ファイル (`data/sample_input.xlsx`) は以下のカラム構成である必要があります。
+
+| Column Name | Description | Unit |
+| :--- | :--- | :--- |
+| `Pvis[W/m^2]` | Visible light intensity | W/m² |
+| `Pnir[W/m^2]` | Near-infrared light intensity | W/m² |
+| `Ain[deg]` | Incident angle | degree |
+| `Tmod[k]` | Module temperature | K |
+| `Th[nm]` | Perovskite thickness | nm |
+| `Bpsk[eV]` | Bandgap | eV |
+| `Terminals` | Number of terminals | - |
+| `Yield[W/m^2]` | Power generation (Target) | W/m² |
+
+##🔬 Methodology
+本システムは 3 段階のフェーズで推論を行います。
+
+Preprocessing: 保存された StandardScaler を用い、入力データを訓練時と同一の統計量で標準化。
+
+Feature Extraction: DAE の中間層から抽出した潜在変数と、TabNet の予測値を組み合わせ、物理特徴量を高次元な入力表現へ変換。
+
+Stacking Inference: 15 個の GBDT モデルによる予測値を、メタモデル（Lasso回帰）が統計的に統合し、最終的な発電量を算出。
 
 ##  🗺  リポジトリ構成
 ```text
@@ -39,36 +86,7 @@ pip install -r requirements.txt
     └── experiment.ipynb    # 試行錯誤の過程を残したノートブック（公開用）
 ```
 
-## 📦 Model Checkpoints
-本モデルの動作に必要な学習済み資産は、[Releases](https://github.com/yukichacha0227-stack/TandemSolar-Yield-Forecaster/releases/tag/v1.0.0) からダウンロードし、以下のディレクトリ構造に従って配置してください。
-※ `.gitignore` により、これらのバイナリファイルはGit管理から除外されています。
-
-```text
-checkpoints/
-├── dae_best_model.pth            # DAEの重み・設定・学習履歴（辞書形式）
-├── tabnet_standalone_best.zip        # TabNetのモデル本体
-├── scalers (1).pkl             # 前処理（StandardScaler）の統計量
-└── stacking/               # スタッキング層のベースモデル群
-    ├── lgbm.pkl            # LightGBM (Base model 1)
-    ├── xgb.pkl             # XGBoost (Base model 2)
-    ├── cat.pkl             # CatBoost (Base model 3)
-    └── stacking_meta_assets.pth      # Lasso (Meta-regressor)
-```
-
-## 📊 Data
-- `data/sample_input.xlsx`: 動作確認用のサンプルデータです。
-  - 実際の推論を行う際は、このファイルと同じカラム構成の Excel ファイルを用意してください。
-  - 本プロジェクトでは、Atlas データの形式に基づいた前処理を `src/data_loader.py` で行っています。
-  - ### 📊 Input Data Format (Excel)
-推論に使用する Excel ファイル (`data/sample_input.xlsx`) は以下のカラム構成である必要があります。
-
-| Column Name | Description | Unit |
-| :--- | :--- | :--- |
-| `Pvis[W/m^2]` | Visible light intensity | W/m² |
-| `Pnir[W/m^2]` | Near-infrared light intensity | W/m² |
-| `Ain[deg]` | Incident angle | degree |
-| `Tmod[k]` | Module temperature | K |
-| `Th[nm]` | Perovskite thickness | nm |
-| `Bpsk[eV]` | Bandgap | eV |
-| `Terminals` | Number of terminals | - |
-| `Yield[W/m^2]` | Power generation (Target) | W/m² |
+##🎓 Acknowledgements
+青山学院大学 理工学部 電気電子工学コース 石河研究室
+──────────────────────────────────────────────────────────────────────────────
+© 2026 Ishikawa Lab, Aoyama Gakuin University.
