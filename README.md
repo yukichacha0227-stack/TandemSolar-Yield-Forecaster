@@ -47,3 +47,16 @@ checkpoints/
 - `data/sample_input.xlsx`: 動作確認用のサンプルデータです。
   - 実際の推論を行う際は、このファイルと同じカラム構成の Excel ファイルを用意してください。
   - 本プロジェクトでは、Atlas データの形式に基づいた前処理を `src/data_loader.py` で行っています。
+  - ### 📊 Input Data Format (Excel)
+推論に使用する Excel ファイル (`data/sample_input.xlsx`) は以下のカラム構成である必要があります。
+
+| Column Name | Description | Unit |
+| :--- | :--- | :--- |
+| `Pvis[W/m^2]` | Visible light intensity | W/m² |
+| `Pnir[W/m^2]` | Near-infrared light intensity | W/m² |
+| `Ain[deg]` | Incident angle | degree |
+| `Tmod[k]` | Module temperature | K |
+| `Th[nm]` | Perovskite thickness | nm |
+| `Bpsk[eV]` | Bandgap | eV |
+| `Terminals` | Number of terminals | - |
+| `Yield[W/m^2]` | Power generation (Target) | W/m² |
