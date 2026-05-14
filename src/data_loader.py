@@ -3,11 +3,21 @@ import joblib
 from sklearn.preprocessing import StandardScaler
 
 def load_solar_data(file_path: str, target_col: str = 'target'):
-    """Excelからデータを読み込み、特徴量(X)と目的変数(y)に分割する"""
+"""
+    ヘッダー付きExcelを読み込み、特徴量(X)と正解データ(y)に分離する。
+    """
+    # 1行目をヘッダーとして読み込む
     df = pd.read_excel(file_path)
-    # ノートブックのロジックに基づき不要なカラムを削除
-    X = df.drop(columns=[target_col])
-    y = df[target_col]
+    
+    # 特徴量として使用するカラムを明示的に指定
+    feature_cols = [
+        'Pvis[W/m^2]', 'Pnir[W/m^2]', 'Ain[deg]', 
+        'Tmod[k]', 'Th[nm]', 'Bpsk[eV]', 'Terminals'
+    ]
+    
+    X = df[feature_cols]
+    y = df['Yield[W/m^2]']
+    
     return X, y
 
 def apply_scaling(X, scaler_path: str = 'checkpoints/scalers.pkl', is_train: bool = False):
