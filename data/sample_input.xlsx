@@ -1,0 +1,41 @@
+import pandas as pd
+import numpy as np
+import os
+
+# フォルダ作成
+os.makedirs('data', exist_ok=True)
+
+# 1. ご指定のカラム名リスト
+columns = [
+    'Pvis[W/m^2]',   # 可視光強度
+    'Pnir[W/m^2]',   # 近赤外光強度
+    'Ain[deg]',      # 入射角
+    'Tmod[k]',       # モジュール温度
+    'Th[nm]',        # ペロブスカイト層膜厚
+    'Bpsk[eV]',      # バンドギャップ
+    'Terminals',     # 端子数
+    'Yield[W/m^2]'   # 発電量（正解データ）
+]
+
+# 2. 物理的に妥当な範囲でランダムデータを生成 (5行分)
+np.random.seed(42)
+rows = 5
+data = {
+    'Pvis[W/m^2]': np.random.uniform(200, 800, rows),
+    'Pnir[W/m^2]': np.random.uniform(200, 600, rows),
+    'Ain[deg]':    np.random.uniform(0, 60, rows),
+    'Tmod[k]':     np.random.uniform(290, 330, rows),
+    'Th[nm]':      np.random.uniform(300, 700, rows),
+    'Bpsk[eV]':    np.random.uniform(1.5, 1.8, rows),
+    'Terminals':   np.random.choice([2, 4], rows), # 2端子または4端子
+    'Yield[W/m^2]': np.random.uniform(100, 300, rows)
+}
+
+df = pd.DataFrame(data)
+
+# 3. Excelとして保存
+file_path = 'data/sample_input.xlsx'
+df.to_excel(file_path, index=False)
+
+print(f"✅ Excel file created at: {file_path}")
+print(df)
