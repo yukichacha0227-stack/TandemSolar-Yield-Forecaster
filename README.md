@@ -10,7 +10,7 @@ Denoising AutoEncoder (DAE) による自己教師あり学習、TabNet による
 - **Robustness**: データのノイズに強い DAE 潜在変数と、未知の気象データに対して高い汎化性能を持つアンサンブル手法の融合。
 - **Developer Friendly**: 複雑な資産管理を `src/config.py` で一元化し、ワンコマンドでの推論・評価が可能。
 
-##🛠 Setup
+## 🛠 Setup
 1. 依存ライブラリのインストール
 pip install -r requirements.txt
 
@@ -29,7 +29,7 @@ checkpoints/
     └── stacking_meta_assets.pth      # Lasso (Meta-regressor)
 ```
 
-##📊 Usage
+## 📊 Usage
 以下のコマンドを実行することで、data/sample_input.xlsx を用いた推論と精度評価が開始されます。
 python main.py
 
@@ -51,7 +51,7 @@ python main.py
 | `Terminals` | Number of terminals | - |
 | `Yield[W/m^2]` | Power generation (Target) | W/m² |
 
-##🔬 Methodology
+## 🔬 Methodology
 本システムは 3 段階のフェーズで推論を行います。
 
 Preprocessing: 保存された StandardScaler を用い、入力データを訓練時と同一の統計量で標準化。
