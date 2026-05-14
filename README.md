@@ -31,6 +31,7 @@ checkpoints/
 
 ## 📊 Usage
 以下のコマンドを実行することで、data/sample_input.xlsx を用いた推論と精度評価が開始されます。
+
 python main.py
 
 ## 📊 Data
