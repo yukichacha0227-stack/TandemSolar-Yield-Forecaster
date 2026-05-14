@@ -42,3 +42,8 @@ checkpoints/
     ├── cat.pkl             # CatBoost (Base model 3)
     └── stacking_meta_assets.pth      # Lasso (Meta-regressor)
 ```
+
+## 📊 Data
+- `data/sample_input.xlsx`: 動作確認用のサンプルデータです。
+  - 実際の推論を行う際は、このファイルと同じカラム構成の Excel ファイルを用意してください。
+  - 本プロジェクトでは、Atlas データの形式に基づいた前処理を `src/data_loader.py` で行っています。
